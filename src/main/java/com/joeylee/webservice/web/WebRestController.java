@@ -2,6 +2,7 @@ package com.joeylee.webservice.web;
 
 import com.joeylee.webservice.domain.posts.PostsRepository;
 import com.joeylee.webservice.dto.posts.PostsSaveRequestDto;
+import com.joeylee.webservice.service.PostsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,16 +20,11 @@ setter
 @AllArgsConstructor
 public class WebRestController {
 
-    PostsRepository postsRepository;
-
-    @GetMapping
-    public String hello() {
-        return "HelloWorld";
-    }
+    PostsService postsService;
 
 
     @PostMapping("/posts")
-    public void savePosts(@RequestBody PostsSaveRequestDto dto){
-        postsRepository.save(dto.toEntity());
+    public Long savePosts(@RequestBody PostsSaveRequestDto dto){
+        return postsService.save(dto);
     }
 }
